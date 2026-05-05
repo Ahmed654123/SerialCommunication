@@ -237,5 +237,78 @@ namespace SerialCommunication
 
         
     }
+
+        private void trackBarPWM9_Scroll(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPortArduino.IsOpen)
+                {
+                    string command = "set pwm9 0" + trackBarPWM9.Value;
+                    serialPortArduino.WriteLine(command);
+                }
+                else
+                {
+                    MessageBox.Show("Geen seriële connectie.");
+                }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Fout" + ex.Message);
+            }
+
+                    
+                
+            }
+
+        private void trackBarPWM10_Scroll(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPortArduino.IsOpen)
+                {
+                    string command = "set pwm10 0" + trackBarPWM10.Value;
+                    serialPortArduino.WriteLine(command);
+                }
+                else
+                {
+                    MessageBox.Show("Geen seriële connectie.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout" + ex.Message);
+            }
+
+
+
+        }
+
+        private void trackBarPWM11_Scroll(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPortArduino.IsOpen)
+                {
+                    string command = "set pwm11 0" + trackBarPWM11.Value;
+                    serialPortArduino.WriteLine(command);
+                }
+                else
+                {
+                    MessageBox.Show("Geen seriële connectie.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fout" + ex.Message);
+            }
+
+
+
+        }
     }
+    
+    
+    
+
 }
