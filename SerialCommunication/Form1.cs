@@ -161,9 +161,12 @@ namespace SerialCommunication
                     MessageBox.Show("Seriële verbinding is niet open.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show("Fout: " + ex.Message);
+                labelStatus.Text = "Error: " + exception.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
             }
 
         }
@@ -195,13 +198,16 @@ namespace SerialCommunication
                     MessageBox.Show("Seriële verbinding is niet open.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show("Fout: " + ex.Message);
+                labelStatus.Text = "Error: " + exception.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
             }
 
-        
-    }
+
+        }
 
         private void checkBoxDigital4_CheckedChanged(object sender, EventArgs e)
         {
@@ -230,13 +236,16 @@ namespace SerialCommunication
                     MessageBox.Show("Seriële verbinding is niet open.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show("Fout: " + ex.Message);
+                labelStatus.Text = "Error: " + exception.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
             }
 
-        
-    }
+
+        }
 
         private void trackBarPWM9_Scroll(object sender, EventArgs e)
         {
@@ -252,14 +261,17 @@ namespace SerialCommunication
                     MessageBox.Show("Geen seriële connectie.");
                 }
             }
-            catch (Exception ex) 
+            catch (Exception exception)
             {
-                MessageBox.Show("Fout" + ex.Message);
+                labelStatus.Text = "Error: " + exception.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
             }
 
-                    
-                
-            }
+
+
+        }
 
         private void trackBarPWM10_Scroll(object sender, EventArgs e)
         {
@@ -275,9 +287,12 @@ namespace SerialCommunication
                     MessageBox.Show("Geen seriële connectie.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show("Fout" + ex.Message);
+                labelStatus.Text = "Error: " + exception.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
             }
 
 
@@ -298,13 +313,75 @@ namespace SerialCommunication
                     MessageBox.Show("Geen seriële connectie.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                MessageBox.Show("Fout" + ex.Message);
+                labelStatus.Text = "Error: " + exception.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
             }
 
 
 
+        }
+
+        private void radioButtonDigital5_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPageOefening3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            timerOefening3.Enabled = tabControl.SelectedIndex == 3;
+
+        }
+
+        private void timerOefening3_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPortArduino.IsOpen)
+                {
+                    string commando;
+                    string antwoord;
+
+                    // D5
+                    serialPortArduino.ReadExisting();
+                    commando = "get d5";
+                    serialPortArduino.WriteLine(commando);
+                    antwoord = serialPortArduino.ReadLine().TrimEnd();
+                    antwoord = antwoord.Substring(4);
+                    radioButtonDigital5.Checked = (antwoord == "1");
+
+                    // D6
+                    
+                    commando = "get d6";
+                    serialPortArduino.WriteLine(commando);
+                    antwoord = serialPortArduino.ReadLine().TrimEnd();
+                    antwoord = antwoord.Substring(4);
+                    radioButtonDigital6.Checked = (antwoord == "1");
+
+                    // D7
+                    
+                    commando = "get d7";
+                    serialPortArduino.WriteLine(commando);
+                    antwoord = serialPortArduino.ReadLine().TrimEnd();
+                    antwoord = antwoord.Substring(4);
+                    radioButtonDigital7.Checked = (antwoord == "1");
+                }
+            }
+            catch (Exception exception)
+            {
+                labelStatus.Text = "Error: " + exception.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
+            }
         }
     }
     
