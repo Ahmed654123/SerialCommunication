@@ -61,7 +61,6 @@
             this.comboBoxBaudrate = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPageOefening1 = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.checkBoxDigital4 = new System.Windows.Forms.CheckBox();
             this.checkBoxDigital3 = new System.Windows.Forms.CheckBox();
             this.checkBoxDigital2 = new System.Windows.Forms.CheckBox();
@@ -72,27 +71,34 @@
             this.trackBarPWM10 = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.trackBarPWM9 = new System.Windows.Forms.TrackBar();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tabPageOefening3 = new System.Windows.Forms.TabPage();
             this.radioButtonDigital7 = new System.Windows.Forms.RadioButton();
             this.radioButtonDigital6 = new System.Windows.Forms.RadioButton();
             this.radioButtonDigital5 = new System.Windows.Forms.RadioButton();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.tabPageOefening4 = new System.Windows.Forms.TabPage();
             this.labelAnalog0 = new System.Windows.Forms.Label();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabPageOefening5 = new System.Windows.Forms.TabPage();
             this.labelHuidigeTemp = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.labelGewensteTemp = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.labelStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.serialPortArduino = new System.IO.Ports.SerialPort(this.components);
             this.timerOefening3 = new System.Windows.Forms.Timer(this.components);
             this.timerOefening4 = new System.Windows.Forms.Timer(this.components);
             this.timerOefening5 = new System.Windows.Forms.Timer(this.components);
+            this.tabPageTemperatuurAlarm = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.labelAlarmTemp = new System.Windows.Forms.Label();
+            this.labelHuidigeTemp2 = new System.Windows.Forms.Label();
+            this.labelStatus2 = new System.Windows.Forms.Label();
+            this.timerTemperatuurAlarm = new System.Windows.Forms.Timer(this.components);
             this.tabControl.SuspendLayout();
             this.tabPageInstellingen.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -100,19 +106,21 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDatabits)).BeginInit();
             this.tabPageOefening1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPageOefening2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPWM11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPWM10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPWM9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabPageOefening3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.tabPageOefening4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.tabPageOefening5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.statusStrip.SuspendLayout();
+            this.tabPageTemperatuurAlarm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // radioButtonVerbonden
@@ -173,6 +181,7 @@
             this.tabControl.Controls.Add(this.tabPageOefening3);
             this.tabControl.Controls.Add(this.tabPageOefening4);
             this.tabControl.Controls.Add(this.tabPageOefening5);
+            this.tabControl.Controls.Add(this.tabPageTemperatuurAlarm);
             this.tabControl.Location = new System.Drawing.Point(16, 65);
             this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
@@ -543,17 +552,6 @@
             this.tabPageOefening1.Text = "Oefening 1";
             this.tabPageOefening1.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::SerialCommunication.Properties.Resources.digital_out;
-            this.pictureBox1.Location = new System.Drawing.Point(227, 21);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(845, 430);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
-            // 
             // checkBoxDigital4
             // 
             this.checkBoxDigital4.AutoSize = true;
@@ -674,17 +672,6 @@
             this.trackBarPWM9.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBarPWM9.Scroll += new System.EventHandler(this.trackBarPWM9_Scroll);
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::SerialCommunication.Properties.Resources.analog_out;
-            this.pictureBox2.Location = new System.Drawing.Point(36, 20);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(813, 430);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
-            // 
             // tabPageOefening3
             // 
             this.tabPageOefening3.Controls.Add(this.radioButtonDigital7);
@@ -741,17 +728,6 @@
             this.radioButtonDigital5.UseVisualStyleBackColor = true;
             this.radioButtonDigital5.CheckedChanged += new System.EventHandler(this.radioButtonDigital5_CheckedChanged);
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::SerialCommunication.Properties.Resources.digital_in;
-            this.pictureBox3.Location = new System.Drawing.Point(227, 21);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(845, 430);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 0;
-            this.pictureBox3.TabStop = false;
-            // 
             // tabPageOefening4
             // 
             this.tabPageOefening4.Controls.Add(this.labelAnalog0);
@@ -775,17 +751,6 @@
             this.labelAnalog0.TabIndex = 1;
             this.labelAnalog0.Text = "1023";
             this.labelAnalog0.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = global::SerialCommunication.Properties.Resources.analog_in;
-            this.pictureBox4.Location = new System.Drawing.Point(33, 22);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(845, 430);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 0;
-            this.pictureBox4.TabStop = false;
             // 
             // tabPageOefening5
             // 
@@ -847,17 +812,6 @@
             this.label9.TabIndex = 1;
             this.label9.Text = "Gewenste Temperatuur";
             // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Image = global::SerialCommunication.Properties.Resources.thermostat;
-            this.pictureBox5.Location = new System.Drawing.Point(32, 22);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(845, 431);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 0;
-            this.pictureBox5.TabStop = false;
-            // 
             // statusStrip
             // 
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -896,6 +850,118 @@
             this.timerOefening5.Interval = 1000;
             this.timerOefening5.Tick += new System.EventHandler(this.timerOefening5_Tick);
             // 
+            // tabPageTemperatuurAlarm
+            // 
+            this.tabPageTemperatuurAlarm.Controls.Add(this.labelStatus2);
+            this.tabPageTemperatuurAlarm.Controls.Add(this.labelHuidigeTemp2);
+            this.tabPageTemperatuurAlarm.Controls.Add(this.labelAlarmTemp);
+            this.tabPageTemperatuurAlarm.Controls.Add(this.pictureBox6);
+            this.tabPageTemperatuurAlarm.Location = new System.Drawing.Point(4, 25);
+            this.tabPageTemperatuurAlarm.Name = "tabPageTemperatuurAlarm";
+            this.tabPageTemperatuurAlarm.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTemperatuurAlarm.Size = new System.Drawing.Size(1037, 484);
+            this.tabPageTemperatuurAlarm.TabIndex = 6;
+            this.tabPageTemperatuurAlarm.Text = "Oefening 6";
+            this.tabPageTemperatuurAlarm.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::SerialCommunication.Properties.Resources.digital_out;
+            this.pictureBox1.Location = new System.Drawing.Point(227, 21);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(845, 430);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::SerialCommunication.Properties.Resources.analog_out;
+            this.pictureBox2.Location = new System.Drawing.Point(36, 20);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(813, 430);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::SerialCommunication.Properties.Resources.digital_in;
+            this.pictureBox3.Location = new System.Drawing.Point(227, 21);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(845, 430);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 0;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::SerialCommunication.Properties.Resources.analog_in;
+            this.pictureBox4.Location = new System.Drawing.Point(33, 22);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(845, 430);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 0;
+            this.pictureBox4.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::SerialCommunication.Properties.Resources.thermostat;
+            this.pictureBox5.Location = new System.Drawing.Point(32, 22);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(845, 431);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox5.TabIndex = 0;
+            this.pictureBox5.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::SerialCommunication.Properties.Resources.temperatuuralarm;
+            this.pictureBox6.Location = new System.Drawing.Point(32, 22);
+            this.pictureBox6.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(845, 431);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox6.TabIndex = 0;
+            this.pictureBox6.TabStop = false;
+            // 
+            // labelAlarmTemp
+            // 
+            this.labelAlarmTemp.AutoSize = true;
+            this.labelAlarmTemp.Location = new System.Drawing.Point(624, 318);
+            this.labelAlarmTemp.Name = "labelAlarmTemp";
+            this.labelAlarmTemp.Size = new System.Drawing.Size(128, 16);
+            this.labelAlarmTemp.TabIndex = 1;
+            this.labelAlarmTemp.Text = "Alarm Temperatuur: ";
+            // 
+            // labelHuidigeTemp2
+            // 
+            this.labelHuidigeTemp2.AutoSize = true;
+            this.labelHuidigeTemp2.Location = new System.Drawing.Point(624, 359);
+            this.labelHuidigeTemp2.Name = "labelHuidigeTemp2";
+            this.labelHuidigeTemp2.Size = new System.Drawing.Size(137, 16);
+            this.labelHuidigeTemp2.TabIndex = 2;
+            this.labelHuidigeTemp2.Text = "Huidige Temperatuur:";
+            // 
+            // labelStatus2
+            // 
+            this.labelStatus2.AutoSize = true;
+            this.labelStatus2.Location = new System.Drawing.Point(624, 398);
+            this.labelStatus2.Name = "labelStatus2";
+            this.labelStatus2.Size = new System.Drawing.Size(44, 16);
+            this.labelStatus2.TabIndex = 3;
+            this.labelStatus2.Text = "Status";
+            // 
+            // timerTemperatuurAlarm
+            // 
+            this.timerTemperatuurAlarm.Interval = 1000;
+            this.timerTemperatuurAlarm.Tick += new System.EventHandler(this.timerTemperatuurAlarm_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -923,23 +989,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDatabits)).EndInit();
             this.tabPageOefening1.ResumeLayout(false);
             this.tabPageOefening1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPageOefening2.ResumeLayout(false);
             this.tabPageOefening2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPWM11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPWM10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPWM9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabPageOefening3.ResumeLayout(false);
             this.tabPageOefening3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tabPageOefening4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.tabPageOefening5.ResumeLayout(false);
             this.tabPageOefening5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            this.tabPageTemperatuurAlarm.ResumeLayout(false);
+            this.tabPageTemperatuurAlarm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1011,6 +1080,12 @@
         private System.Windows.Forms.Timer timerOefening3;
         private System.Windows.Forms.Timer timerOefening4;
         private System.Windows.Forms.Timer timerOefening5;
+        private System.Windows.Forms.TabPage tabPageTemperatuurAlarm;
+        internal System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Label labelStatus2;
+        private System.Windows.Forms.Label labelHuidigeTemp2;
+        private System.Windows.Forms.Label labelAlarmTemp;
+        private System.Windows.Forms.Timer timerTemperatuurAlarm;
     }
 }
 

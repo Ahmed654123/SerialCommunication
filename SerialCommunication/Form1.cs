@@ -60,6 +60,8 @@ namespace SerialCommunication
                 if (serialPortArduino.IsOpen)
                 {
                     // Ik heb verbinding -> gebruiker wil verbreken
+                    serialPortArduino.WriteLine("set d3 0"); // led UIT
+                    serialPortArduino.WriteLine("set d4 0"); // buzzer UIT
                     serialPortArduino.Close();
                     radioButtonVerbonden.Checked = false;
                     buttonConnect.Text = "Connect";
@@ -340,7 +342,7 @@ namespace SerialCommunication
             timerOefening3.Enabled = tabControl.SelectedIndex == 3;
             timerOefening4.Enabled = tabControl.SelectedIndex == 4;
             timerOefening5.Enabled = tabControl.SelectedIndex == 5;
-
+            timerTemperatuurAlarm.Enabled = tabControl.SelectedIndex == 6;
 
         }
 
@@ -470,6 +472,119 @@ namespace SerialCommunication
                 buttonConnect.Text = "Connect";
             }
 
+        }
+
+        int toestand = 0;
+
+        private void timerTemperatuurAlarm_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (serialPortArduino.IsOpen)
+                {
+                    string commando;
+                    string antwoord;
+
+                    // Analoge pin 0 uitlezen (alarmtemperatuur)
+                    serialPortArduino.ReadExisting();
+                    serialPortArduino.WriteLine("get a0");
+                    serialPortArduino.ReadLine();
+
+                    // Tweede meting gebruiken
+                    serialPortArduino.ReadExisting();
+                    serialPortArduino.WriteLine("get a0");
+                    antwoord = serialPortArduino.ReadLine().TrimEnd();
+                    antwoord = antwoord.Substring(4);
+                    int A0 = Convert.ToInt32(antwoord);
+                    double huidigeTemp2 = A0 * (5.0 / 1023.0) * 100.0;
+                    labelHuidigeTemp2.Text = huidigeTemp2.ToString("0.0") + " °C";
+
+                    // Analoge pin 1 uitlezen (huidige temperatuur)
+                    serialPortArduino.ReadExisting();
+                    commando = "get a1";
+                    serialPortArduino.WriteLine(commando);
+
+                    antwoord = serialPortArduino.ReadLine().TrimEnd();
+                    antwoord = antwoord.Substring(4);
+
+                    int A1 = Convert.ToInt32(antwoord);
+
+                    double alarmTemp = A1 * (70.0 / 1023.0) - 10.0;
+                    labelAlarmTemp.Text = alarmTemp.ToString("0.0") + " °C";
+
+                    // Digitale pin 5 uitlezen (buttonBevestig)
+                    serialPortArduino.ReadExisting();
+                    commando = "get d5";
+                    serialPortArduino.WriteLine(commando);
+
+                    antwoord = serialPortArduino.ReadLine().TrimEnd();
+                    antwoord = antwoord.Substring(4);
+
+                    bool buttonBevestig = antwoord == "1";
+
+                    // OK → ALARM
+                    if (toestand == 0 && huidigeTemp2 >= alarmTemp)
+                    {
+                        toestand = 1;
+                    }
+                    // ALARM → BEVESTIGD of OK
+                    else if (toestand == 1 && buttonBevestig)
+                    {
+                        if (huidigeTemp2 < alarmTemp)
+                            toestand = 0;
+                        else
+                            toestand = 2;
+                    }
+                    // BEVESTIGD → OK
+                    else if (toestand == 2 && huidigeTemp2 < alarmTemp)
+                    {
+                        toestand = 0;
+                    }
+
+                    // ── Visualiseer status ────────────────────────────────────────
+
+                    if (toestand == 0)
+                    {
+                        labelStatus2.Text = "OK";
+                    }
+                    else if (toestand == 1)
+                    {
+                        labelStatus2.Text = "ALARM";
+                    }
+                    else if (toestand == 2)
+                    {
+                        labelStatus2.Text = "BEVESTIGD";
+                    }
+
+                    // ── Stuur led (d3) en buzzer (d4) aan ────────────────────────
+
+                    if (toestand == 0)
+                    {
+                        serialPortArduino.WriteLine("set d2 0"); // led UIT
+                        serialPortArduino.WriteLine("set d3 0"); // buzzer UIT
+                    }
+                    else if (toestand == 1)
+                    {
+                        serialPortArduino.WriteLine("set d2 1"); // led AAN
+                        serialPortArduino.WriteLine("set d3 1"); // buzzer AAN
+                    }
+                    else if (toestand == 2)
+                    {
+                        serialPortArduino.WriteLine("set d2 1"); // led AAN
+                        serialPortArduino.WriteLine("set d3 0"); // buzzer UIT
+                    }
+                
+
+
+            }
+            }
+            catch (Exception exception)
+            {
+                labelStatus.Text = "Error: " + exception.Message;
+                serialPortArduino.Close();
+                radioButtonVerbonden.Checked = false;
+                buttonConnect.Text = "Connect";
+            }
         }
     }
     
